@@ -21,6 +21,26 @@ d2:
   theme: "Origami"
 ---
 
+## Attribution & copyright notice
+
+::: {style="font-size: 60%;"}
+
+<br>
+This lecture is based on the following open access materials:
+
+- Voltron Data, [The Composable Codex](https://voltrondata.com/codex/a-new-frontier)
+- Cody Peterson, [Modern, hybrid, open analytics](https://anthology-of-data.science/posts/ibis-analytics/)
+- Thierry Jean, [Portable dataflows with Ibis and Hamilton](https://anthology-of-data.science/posts/hamilton-ibis/)
+- Documentation of the following Python libraries: [DuckDB](https://duckdb.org/docs/), [Ibis](https://ibis-project.org), [hamilton](https://github.com/dagworks-inc/hamilton), [polars](https://docs.pola.rs/), [Shiny for Python](https://shiny.posit.co/py/)
+
+Source code: [https://github.com/anthology-of-data-science/lecture-engineering-data-ai-platforms](https://github.com/anthology-of-data-science/lecture-engineering-data-ai-platforms)
+
+```{=html}
+<p xmlns:cc="http://creativecommons.org/ns#" >Daniel Kapitan, <em>Engineering data science & AI platforms</em>.<br>This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+```
+:::
+
+
 ## How to manage<br>the data science lifecyclein real life?
 
 <br><br>
@@ -38,7 +58,6 @@ Data science teams need to interact with IT:
 {{< source "Kleppmann & Riccomini (2026)" url="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/">}}
 
 :::: {.columns}
-
 ::: {.column width="60%" style="font-size: 50%;"}
 
 - **Chapter 1: Tradeoffs in Data Systems Architecture**<br>_Analytical versus Operational Systems - Cloud versus Self-Hosting - Distributed versus Single-Node Systems - Data Systems, Law, and Society_
@@ -46,59 +65,29 @@ Data science teams need to interact with IT:
 - **Chapter 3: Data Models and Query Languages**<br>_Relational Model versus Document Model - Graph-Like Data Models - Event Sourcing and CQRS - DataFrames, Matrices, and Arrays_
 - **Chapter 4: Storage and Retrieval**<br>_Storage and Indexing for OLTP - Data Storage for Analytics - Multidimensional and Full-Text Indexes_
 - (...)
-- **Chapter 11: Batch Processing**<br>Batch Processing in Distributed Systems - Batch Processing Models - Batch Use Cases_
+- **Chapter 11: Batch Processing**<br>_Batch Processing in Distributed Systems - Batch Processing Models - Batch Use Cases_
 :::
 
 ::: {.column width="40%"}
-
-![](images/ddia-2.jpg){fig-align="right"}
-
+![](images/ddia-2.jpg){fig-align="right" width=80%}
 :::
-
 ::::
 
 ## The common definition of data engineering
-{{< source "Reis & Housley (2022)" url="https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/">}}
+{{< source "Reiss & Housley (2022)" url="https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/">}}
 
 ![](images/reiss-data-engineering.png)
 
-#  MLOps {background-image="images/xkcd-2582-data-trap.png" background-size="30%"}
+#  {background-image="images/DeborahLupton-Servers-Landscape-2560x3620.png" background-size="cover" style="font-size: 70%;" align="center"}
 
-## Hidden technical debt in ML systems {background-color="#ffffff"}
-{{< source "Scully et al. (2015)" url="https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf" >}}
-
-```{.d2 theme="Terminal" layout="elk" pad=20 width="100%" sketch="true"}
-**.shape: oval
-direction: right
-root: Hidden technical debt in ML systems
-ddd: Data dependency debt
-ad: analysis debt
-ap: anti-patterns
-
-root -> ap
-ap -> Abstraction debt
-ap -> Glue code
-ap -> Pipeline jungles
-ap -> Dead experimental codepaths
-ap -> Common smells
-
-root -> ddd
-ddd -> Unstable data dependencies
-ddd -> Underutilized data dependencies
-
-root -> ad
-ad -> Direct feedback loop
-ad -> Indirect feedback loop
-
-root -> configuration debt
-
-```
-
+::: {.newsection style="--h1-banner-color: #6C8864AA; --h1-banner-text-color: #DFC65E"}
+Designing data science & AI platforms
+:::
 
 ## Stages of machine learning CI/CD automation pipeline
 {{< source "Google Cloud docs" url="https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning" >}}
 
-![](images/mlops-overview.png)
+![](images/mlops-overview.png){fig-align="center"}
 
 ## MLOps level 0 {background-color="#ffffff"}
 {{< source "Google Cloud docs" url="https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning" >}}
@@ -164,5 +153,35 @@ MLflow Tracking & Experiments:
 {{< source "MLflow" url="https://mlflow.org/docs/latest/ml/deployment/" >}}
 
 ![](images/mlflow-deployment.png)
+
+## Hidden technical debt in ML systems {background-color="#ffffff"}
+{{< source "Scully et al. (2015)" url="https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf" >}}
+
+```{.d2 theme="Terminal" layout="elk" pad=20 sketch="true"}
+**.shape: oval
+direction: right
+root: Hidden technical debt in ML systems
+ddd: Data dependency debt
+ad: analysis debt
+ap: anti-patterns
+
+root -> ap
+ap -> Abstraction debt
+ap -> Glue code
+ap -> Pipeline jungles
+ap -> Dead experimental codepaths
+ap -> Common smells
+
+root -> ddd
+ddd -> Unstable data dependencies
+ddd -> Underutilized data dependencies
+
+root -> ad
+ad -> Direct feedback loop
+ad -> Indirect feedback loop
+
+root -> configuration debt
+```
+
 
 

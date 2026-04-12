@@ -1,0 +1,211 @@
+#  {background-image="images/DeborahLupton-Servers-Landscape-2560x3620.png" background-size="cover" style="font-size: 70%;" align="center"}
+
+::: {.newsection style="--h1-banner-color: #6C8864AA; --h1-banner-text-color: #DFC65E"}
+Designing data science & AI platforms
+:::
+
+## Our dream: a data system that just works
+{{< source "the Composable Codex" url="https://web.archive.org/web/20251208133433/https://voltrondata.com/codex" >}}
+
+<br>
+
+![](images/dream-data-system.png)
+
+## The problem {background-color="#ffffff"}
+{{< source "MAD landscape" url="https://mad.firstmark.com/" >}}
+
+![](images/open-standards-mad-landscape.jpg)
+
+
+## The Composable Data Management System Manifesto
+{{< source "Pedreira et al. (2023)" url="https://dl.acm.org/doi/10.14778/3603581.3603604" >}}
+
+<br>
+
+::: {style="font-size: 80%"}
+> _The requirement for specialization in data management systems has evolved faster than our software development practices. After decades of organic growth, this situation has created a **siloed landscape** composed of hundreds of products developed and maintained as monoliths, with limited reuse between systems. This fragmentation has resulted in developers often reinventing the wheel, **increased maintenance costs, and slowed down innovation**. It has also affected the end users, who are often required to learn the **idiosyncrasies of dozens of incompatible SQL and non-SQL API dialects**, and settle for systems with incomplete functionality and inconsistent semantics._
+:::
+
+## It all started with the relational database management systems (RDBMS) {background-color="#ffffff"}
+{{< source "E.F. Codd (1970)" url="https://doi.org/10.1145/362384.362685" >}}
+
+![](images/coddpaper.webp)
+
+
+## What makes a database?
+
+::: {.columns}
+::: {.column}
+![](images/db-catalog-schema.png)
+:::
+::: {.column style="font-size: 80%;"}
+
+| System     | Catalog  | Database   |
+|------------|----------|------|
+| postgresql, mysql, mssql, duckdb | database | schema     |
+| datafusion, trino | catalog        | schema     |
+| druid      | dataSourceType | dataSource |
+| bigquery   | project        | database   |
+| flink      | catalog        | database   |
+| clickhouse |                | database   |
+| clickhouse, impala, mysql, pyspark, snowflake |      | database   |
+:::
+:::
+
+## Comparing operational and analytical data systems
+{{< source "Kleppmann & Riccomini (2026), chapter 1" url="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" >}}
+
+<br>
+
+::: {style="font-size: 70%;"}
+|Property|Operational systems (OLTP)|Analytic systems (OLAP)|
+|---|-------|------|
+|Main read pattern|Point queries (fetch individual records by key)|Aggregate over large number of records|
+|Main write pattern|Create, update, and delete individual records|Bulk import (ETL) or event stream|
+|Human user example|End user of web/mobile application|Internal analyst, for decision support|
+|Type of queries|Fixed, predefined by application|Arbitrary, ad-hoc exploration by analysts|
+|Query volume|Lost of small queries|Few queries, each is complex|
+|Data represents|Latest state of data (current point in time)|History of events that happened over time|
+|Dataset size|Gigabytes to terabytes|Terabytes to petabytes|
+:::
+
+## Evolution of analytical system architectures
+{{< source "Armbrust et al. (2021)" url="https://15721.courses.cs.cmu.edu/spring2023/papers/02-modern/armbrust-cidr21.pdf" >}}
+
+![](images/generations-data-plattforms.png)
+
+## Unbundling data warehouses
+{{< source "Kleppmann & Riccomini (2026), chapter 4" url="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" >}}
+
+<br>
+
+:::{style="font-size: 60%"}
+::: {.list-table tbl-colwidths="[25,40,35]"}
+- - Component
+  - Function
+  - Open source software
+
+- - Open **query** engine
+  - Parse SQL queries, optimize them into execution plans, and execute them against the data
+  - [Apache DataFusion](https://datafusion.apache.org/)<br>[Apache Spark](https://spark.apache.org/)<br>[DuckDB](https://duckdb.org/)
+
+- - Open **catalog** format
+  - Defines which tables are contained in the database
+  - [Apache Iceberg](https://iceberg.apache.org/)<br>[Unity catalog](https://www.unitycatalog.io/)<br>[Lance](https://lance.org/)
+
+- - Open **table** format
+  - Support row inserts and deletions
+  - [Apache Iceberg](https://iceberg.apache.org/)<br>[Lance](https://lance.org/)<br>[Delta Lake](https://delta.io/)<br>[Apache Hudi](https://hudi.apache.org/)
+
+- - Open **storage** formats
+  - Determines how the rows of a table are encoded as bytes in a file
+  - [Apache Parquet](https://parquet.apache.org/)<br>[Lance](https://lance.org/)<br>[Apache Orc](https://orc.apache.org/docs/)
+
+- - Open **memory** formats
+  - Determines how the rows of a table are encoded as bytes in **memory**
+  - [Apache Arrow](https://arrow.apache.org/)
+
+:::
+:::
+
+::: {.notes}
+Unbundling driven by move to the cloud
+
+- cheap blob storage
+- microservice architecture ("serverless")
+:::
+
+## From row-based to column-based systems
+{{< source "Apache Arrow documentation" url="https://arrow.apache.org/overview/" >}}
+
+![](images/row-vs-columnar-data.png)
+
+## The Composable Data Stack takes the unbundling even further
+{{< source "the Composable Codex" url="https://web.archive.org/web/20251208133433/https://voltrondata.com/codex" >}}
+
+![](images/composable-data-stack.png)
+
+## The Composable Data Stack takes the unbundling even further
+{{< source "the Composable Codex" url="https://web.archive.org/web/20251208133433/https://voltrondata.com/codex" >}}
+
+![](images/composable-data-stack-implementation-2.png)
+
+## End-to-end columnar data with Apache Arrow ADBC and Flight SQL
+{{< source "Apache Arrow project" url="https://arrow.apache.org/blog/2023/01/05/introducing-arrow-adbc/" >}}
+
+![](images/parquet-arrow-iceberg.png)
+
+## From components to a whole platform architecture
+{{< source "Andreesen Horowitz" url="https://a16z.com/emerging-architectures-for-modern-data-infrastructure/" >}}
+
+![](images/Unified-Data-Infrastructure-2.0.png)
+
+## From components to a whole platform architecture
+{{< source "Andreesen Horowitz" url="https://a16z.com/emerging-architectures-for-modern-data-infrastructure/" >}}
+
+![](images/Machine-Learning-Infrastructure-2.0.png)
+
+## Big Data Is Dead
+{{< source "Jordan Tigani" url="https://motherduck.com/blog/big-data-is-dead/" >}}
+
+![](images/big-data-is-dead.png){}
+
+## The rise of embedded databases
+{{< source "the Data Quarry blog" url="https://thedataquarry.com/posts/embedded-db-1/" >}}
+
+:::{style="font-size: 60%"}
+::: {.list-table}
+- - Type of data
+  - Open source embedable database
+
+- - Multi-modal
+  - - [LanceDB](https://www.lancedb.com/)
+    - [CozoDB](https://www.cozodb.org/)
+
+- - Relational
+  - - [DuckDB](https://duckdb.org)
+
+- - Key-value documents
+  - - [RocksDB](https://rocksdb.org/)
+
+- - Vector
+  - - [Chroma](https://docs.trychroma.com/docs/overview/introduction)
+
+- - Labeled-property graph with Cypher query engine
+  - - [LadybudDB](https://ladybugdb.com/)
+
+- - Tripe-store with SPARQL query engine
+  - - [qlever](https://docs.qlever.dev/)
+
+:::  
+:::
+
+## So has our dream come true?
+{{< source "the Composable Codex" url="https://web.archive.org/web/20251208133433/https://voltrondata.com/codex" >}}
+
+![](images/dream-data-system.png)
+
+## We are getting very close ... 
+{{< source "DuckLake" url="https://ducklake.select/" >}}
+
+<br>
+
+![](images/ducklake.png){fig-align="center"}
+
+## Diagonal scaling of a DuckLake lakehouse
+{{< source "Cloudzero" url="https://www.cloudzero.com/blog/horizontal-vs-vertical-scaling/" >}}
+
+::: {.columns}
+::: {.column}
+![](images/scaling-type.png)
+:::
+::: {.column style="font-size: 80%;"}
+
+<br>
+
+- **Vertical scaling** of single node query engines that can process up to 100 TB, covering 99% of use cases
+- **Horizontal scaling** of blob storage in (sovereign!) data centres
+
+:::
+:::
+

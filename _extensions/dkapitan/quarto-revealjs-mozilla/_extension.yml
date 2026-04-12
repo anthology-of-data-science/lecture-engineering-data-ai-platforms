@@ -6,6 +6,8 @@ contributes:
   shortcodes:
     - source.lua
   formats:
+    common:
+      fig-align: center
     revealjs:
       filters:
         - logo.lua

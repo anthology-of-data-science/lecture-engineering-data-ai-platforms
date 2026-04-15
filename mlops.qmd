@@ -1,8 +1,39 @@
-#  {background-image="images/DeborahLupton-Servers-Landscape-2560x3620.png" background-size="cover" style="font-size: 70%;" align="center"}
+#  {background-image="images/cavemen-wheel.png" background-size="cover" style="font-size: 70%;" align="center"}
 
-::: {.newsection style="--h1-banner-color: #6C8864AA; --h1-banner-text-color: #DFC65E"}
+::: {.newsection style="--h1-banner-color: #CCCCCCAA; --h1-banner-text-color: #111111"}
 MLOps
 :::
+
+<!-- ## Technical debt {background-image="images/cavemen-wheel.png"} -->
+
+## Hidden technical debt in ML systems {background-color="#ffffff"}
+{{< source "Scully et al. (2015)" url="https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf" >}}
+
+```{.d2 theme="Terminal" layout="elk" pad=20 sketch="true"}
+**.shape: oval
+direction: right
+root: Hidden technical debt in ML systems
+ddd: Data dependency debt
+ad: analysis debt
+ap: anti-patterns
+
+root -> ap
+ap -> Abstraction debt
+ap -> Glue code
+ap -> Pipeline jungles
+ap -> Dead experimental codepaths
+ap -> Common smells
+
+root -> ddd
+ddd -> Unstable data dependencies
+ddd -> Underutilized data dependencies
+
+root -> ad
+ad -> Direct feedback loop
+ad -> Indirect feedback loop
+
+root -> configuration debt
+```
 
 ## Stages of machine learning CI/CD automation pipeline
 {{< source "Google Cloud docs" url="https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning" >}}
@@ -34,6 +65,11 @@ The pipeline consists of the following stages:
 :::
 
 ![](images/mlops-level-2.svg){fig-align="center"}
+
+## ONNX as the standard for ai interoperability {background-color="#ffffff"}
+{{< source "ONNX explained" url="https://viso.ai/computer-vision/onnx-explained-a-new-paradigm-in-ai-interoperability/" >}}
+
+![](images/ONNX-explained.webp)
 
 ## The most complete open source MLOps library {background-color="#ffffff"}
 {{< source "MLflow" url="https://mlflow.org/docs/latest/ml/" >}}
@@ -74,34 +110,51 @@ MLflow Tracking & Experiments:
 
 ![](images/mlflow-deployment.png)
 
-## Hidden technical debt in ML systems {background-color="#ffffff"}
-{{< source "Scully et al. (2015)" url="https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf" >}}
+## How about testing? {background-color="#ffffff"}
+{{< source "the Practical Test Pyramid" url="https://martinfowler.com/articles/practical-test-pyramid.html" >}}
 
-```{.d2 theme="Terminal" layout="elk" pad=20 sketch="true"}
-**.shape: oval
-direction: right
-root: Hidden technical debt in ML systems
-ddd: Data dependency debt
-ad: analysis debt
-ap: anti-patterns
+::: {.columns}
+::: {.column}
+<br>
 
-root -> ap
-ap -> Abstraction debt
-ap -> Glue code
-ap -> Pipeline jungles
-ap -> Dead experimental codepaths
-ap -> Common smells
+![](images/test-pyramid.png){.nostretch fig-align="center" style="display:block; margin-left:auto; margin-right:auto;"}
+:::
+::: {.column}
+<br>
 
-root -> ddd
-ddd -> Unstable data dependencies
-ddd -> Underutilized data dependencies
+- Write tests with different granularity
+- The more high-level you get the fewer tests you should have
+:::
+:::
 
-root -> ad
-ad -> Direct feedback loop
-ad -> Indirect feedback loop
+## How about testing? {background-color="#ffffff"}
+{{< source "Breck et al. (2017)" url="https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/" >}}
 
-root -> configuration debt
-```
+![](images/mlops-testing.png)
 
+## The test strategy depends on the end product
+
+
+::: {.list-table style="font-size: 50%;"}
+
+- - 
+  - Type of test
+
+- - **UI**
+  - - Relevant when developing a dashboard or app (informatieproduct)
+    - End-user testing of interactive visualisations can be very time-consuming and hence costly!
+
+- - **Contract**
+  - - Relevant when developing REST APIs
+    - Differentiate between consumer vs producer testrow 1 col 2
+
+- - **Integration**
+  - - Often starting point of testing e.g. interacting with data stores
+    - Consider writing simple checks on datasets when developing ETL pipelines (row counts, number of unique IDs, min-max dates etc.)
+
+- - **Unit**
+  - - You shouldn’t need to write unit test if you use standard ML libraries
+    - Relevant for data processing (e.g. your own utility functions for data cleaning and data validation (row counts!))
+:::
 
 

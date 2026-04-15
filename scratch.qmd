@@ -69,3 +69,69 @@ Ibis also has methods that operate directly on a column of structs:
 - Setup and manage access control mechanisms in an operational data platform
 - Provide documentation for non-technical users
 - Reporting on data quality
+
+
+## Imperative vs. declarative programming
+{{< source "Simon Späti" url="https://www.ssp.sh/brain/declarative-vs-imperative/" >}}
+
+![](images/declarative-imperative.png)
+
+
+## The split-apply-combine strategy for data analysis {background-color="#ffffff"}
+{{< source "Wickham (2011)" url="https://doi.org/10.18637/jss.v040.i01" >}}
+
+<br>
+
+![](images/split-apply-combine.webp)
+
+
+##  Overview data transformations in different libraries
+
+::: {style="font-size: 80%;"}
+
+| concept | pandas | polars | ibis | PySpark | dplyr | SQL |
+| --- | --- | ---| --- | --- | --- | --- |
+| **split** | groupby() | group_by() | group_by() | groupBy() | group_by() | GROUP BY |
+| **combine** | join (), merge() | join() | left_join, inner_join() etc. |  join() | left_join, inner_join() etc. | LEFT JOIN, JOIN etc. |
+| **filtering (row based)**| loc[], query() | filter() | filter() | filter() | filter() | WHERE | 
+| **select (column based)**| loc[], iloc[],| select() | select() | select() | select() | SELECT | 
+| **mutate** | assign() | with_columns() | mutuate() | withColumn() | mutate() | ADD | 
+| **ordering** | sort_values() | sort() | order_by() | orderBy() | arrange() | ORDER BY |
+
+:::
+## Method chaining makes functional code more readable
+{{< source "Tom's (Augspurger) Blog (2016)" url="https://tomaugspurger.net/posts/method-chaining/" >}}
+
+<br>
+
+::: {.card-grid .cols-2}
+::: {.card style="font-size: 75%;"}
+
+```python
+tumble_after(
+    broke(
+        fell_down(
+            fetch(went_up(jack_jill, "hill"), "water"),
+            jack),
+        "crown"),
+    "jill"
+)
+```
+:::
+::: {.card style="font-size: 75%;"}
+```python
+(jack_jill
+  .went_up("hill")
+  .fetch("water")
+  .fell_down("jack")
+  .broke("crown")
+  .tumble_after("jill")
+)
+```
+:::
+:::
+
+## Introducting Software-Defined Assets
+{{< source "Dagster" url="https://dagster.io/blog/software-defined-assets" >}}
+
+![](images/software-defined-asset.png)

@@ -9,11 +9,11 @@ Patterns for building data & AI systems
 
 <br>
 
-- **Pipes and filters pattern** for building data processing flows
+- **Pipes and filters pattern** for batch data processing flows
 - **Layers pattern** for achieving interoperability
 - **the hub-and-spoke event broker topology pattern** for federated data systems
 
-## ETL, ELT, DAGs, pipelines, dataflows: it's all the same
+## ETL, ELT, DAGs, pipelines, dataflows: it's all the same  {background-color="#ffffff"}
 {{< source "Dagster" url="https://dagster.io" >}}
 
 ![](images/dagster-dataflow.png)
@@ -21,12 +21,14 @@ Patterns for building data & AI systems
 ## Business process models are also directed acyclic graphs
 {{< source "Kleppmann & Riccomini (2026), chapter 5" url="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" >}}
 
-<br>
+<br><br>
 
 ![](images/bpmn.png)
 
-## Batch data processing has a strong functional flavour
+## Batch data processing has a strong functional flavour {background-color="#ffffff"}
 {{< source "Hamilton" url="https://hamilton.dagworks.io/en/latest/" >}}
+
+<br>
 
 ![](images/hamilton-architecture-overview.webp)
 
@@ -36,75 +38,60 @@ Patterns for building data & AI systems
 
 :::
 
-## The split-apply-combine strategy for data analysis
-{{< source "Wickham (2011)" url="https://doi.org/10.18637/jss.v040.i01" >}}
+## Why functional data engineering?<br>The problem of slowly changing dimensions {background-color="#ffffff"}
+{{< source "Wikipedia" url="https://en.wikipedia.org/wiki/Slowly_changing_dimension" >}}
 
-<br>
-
-![](images/split-apply-combine.webp)
-
-
-##  Overview data transformations in different libraries
-
-::: {style="font-size: 80%;"}
-
-| concept | pandas | polars | ibis | PySpark | dplyr | SQL |
-| --- | --- | ---| --- | --- | --- | --- |
-| **split** | groupby() | group_by() | group_by() | groupBy() | group_by() | GROUP BY |
-| **combine** | join (), merge() | join() | left_join, inner_join() etc. |  join() | left_join, inner_join() etc. | LEFT JOIN, JOIN etc. |
-| **filtering (row based)**| loc[], query() | filter() | filter() | filter() | filter() | WHERE | 
-| **select (column based)**| loc[], iloc[],| select() | select() | select() | select() | SELECT | 
-| **mutate** | assign() | with_columns() | mutuate() | withColumn() | mutate() | ADD | 
-| **ordering** | sort_values() | sort() | order_by() | orderBy() | arrange() | ORDER BY |
-
-:::
-## Method chaining makes functional code more readable
-{{< source "Tom's (Augspurger) Blog (2016)" url="https://tomaugspurger.net/posts/method-chaining/" >}}
-
-<br>
-
-::: {.card-grid .cols-2}
-::: {.card style="font-size: 75%;"}
-
-```python
-tumble_after(
-    broke(
-        fell_down(
-            fetch(went_up(jack_jill, "hill"), "water"),
-            jack),
-        "crown"),
-    "jill"
-)
+```{=html}
+<iframe width="1200" height="800" src="https://en.wikipedia.org/wiki/Slowly_changing_dimension" title="Wikipedia"></iframe>
 ```
+
+## Why functional data engineering?<br>Immutability, snapshots and partitions {background-color="#ffffff"}
+{{< source "Maxima Beauchemin (2018)" url="https://maximebeauchemin.medium.com/functional-data-engineering-a-modern-paradigm-for-batch-data-processing-2327ec32c42a" >}}
+
+::: {.columns}
+::: {.column width="40%"}
+![](images/dag-past-dependency.png)
 :::
-::: {.card style="font-size: 75%;"}
-```python
-(jack_jill
-  .went_up("hill")
-  .fetch("water")
-  .fell_down("jack")
-  .broke("crown")
-  .tumble_after("jill")
-)
-```
+::: {.column width="10%"}
+:::
+::: {.column width="40%"}
+![](images/dag-partitions.png)
 :::
 :::
 
-## Functional programming
+::: {.notes}
+- Strictly speaking, functional programming paradigm only uses immutable objects.
+- It’s possible to use functional practices where the exposed objects are in fact mutable.
+- Think of partitions as immutable blocks of data
+  - Systematically overwrite partitions to make your tasks functional.
+  - A pure task should always fully overwrite a partition as its output.
+:::
 
-![](images/functional-programming.png)
-
-## Imperative vs. declarative programming
 
 ## Idempotency
 
-## Immutability: table partitions as immutable objects
-{{< source "Maxima Beauchemin (2018)" url="https://maximebeauchemin.medium.com/functional-data-engineering-a-modern-paradigm-for-batch-data-processing-2327ec32c42a" >}}
+:::{.callout-warning}
 
-## Introducting Software-Defined Assets
-{{< source "Dagster" url="https://dagster.io/blog/software-defined-assets" >}}
+```
+def current_temperature(location: str) -> int:
+	return MyWeatherService().get_current_temperature(location)
+def non_idempotent_function(location: str, destination: str) -> None:
+	with open(destination, ‘w’) as f:
+		f.write(current_temperature(location))
+```
+:::
 
-![](images/software-defined-asset.png)
+:::{.callout-tip}
+
+```
+def get_temperature(timestamp: str, location: str) -> int:
+	return MyWeatherService().get_temperature(location, timestamp)
+def idempotent_function(timestamp: str, location: str, destination: str) -> None:
+	with open(destination, ‘w’) as f:
+		f.write(get_temperature(timestamp, location))
+```
+
+:::
 
 ## Software-Defined Assets bring it all together
 {{< source "Dagster" url="https://dagster.io/glossary/software-defined-assets" >}}
@@ -119,5 +106,27 @@ tumble_after(
 - **Partitioning and Backfills:** SDAs support time partitioning and backfills out of the box, which is useful for managing historical data and ensuring data consistency.
 :::
 
-## Same workflow for machine learning pipelines
+## Same approach for machine learning pipelines  {background-color="#ffffff"}
+{{< source "Dagster" url="https://dagster.io/blog/dagster-ml-pipelines" >}}
+
+![](images/dagster-ml.webp)
+
+## OpenLineage as the standard for metadata collection and data lineage
+{{< source "OpenLineage docs" url="https://openlineage.io/docs/" >}}
+
+
+::: {.columns}
+::: {.column}
+![](images/ol-stack.svg)
+:::
+::: {.column}
+![](images/ol-datamodel.svg)
+:::
+:::
+
+## Marquez is the open source reference implementation of OpenLineage
+{{< source "Marquez project" url="https://marquezproject.ai/" >}}
+
+![](images/marquez-unified-graph.png)
+
 

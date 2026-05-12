@@ -275,6 +275,53 @@ Bringing semantics back into data & AI engineering
 :::
 :::
 
+## Are graphs the future?
+
+:::{style="font-size: 70%;"}
+<br>
+
+### I certainly think so
+
+- Read this comprehensive introduction by [Hogan et al. (2021)](https://dl.acm.org/doi/pdf/10.1145/3447772)
+- Labeled property graph (cypher/GQL): try the [neo4j sandbox](https://neo4j.com/sandbox/)
+- RDF Triple Store (SPARQL): try the [data.world SPARQL tutorial](https://neo4j.com/sandbox/)
+
+:::{.callout-caution}
+- The RDF/SPARQL stack is mostly used by the ontology community
+- Labeled Property Graphs as more commonly used by companies
+- [Graph Query Language GQL](https://www.gqlstandards.org/) is the new ISO standard, similar to SQL and derived from cypher (neo4j)
+- There is also [GraphQL](https://graphql.org/), which is an API format and something completely different from GQL
+:::
+
+:::
+
+## SPARQL vs. Cypher/GQL comparison
+{{< source "Arthur Keen (2018)" url="https://dzone.com/articles/sparql-and-cypher" >}}
+
+![](images/sparql-gql.png)
+
+## Choose your data structure and engine wisely
+{{< source "Rishabh Agarwal (2025)" url="https://designsystemsweekly.substack.com/p/15-databases-15-use-cases-the-ultimate" >}}
+
+![](images/types-of-databases.png)
+
+## The elephant is your friend
+{{< source "Pigsty" url="https://pigsty.io/ext/" >}}
+
+:::{.columns}
+:::{.column}
+![](images/postgresql-ecosystem.png)
+:::
+:::{.column style="font-size: 70%;"}
+
+<br>
+
+- **One physical engine:** PostgreSQL is the most widely used open source relational database management system
+- **Supports different data structures:** not only relational but also document model ([JSONB](https://neon.com/guides/document-store)) and labeled property graph ([Apache AGE](https://age.apache.org/))
+- … plus many use-case specific extensions such as time-series database, spatial database etc.
+:::
+:::
+
 ## How to manage<br>the data science lifecycle in real life?
 
 <br><br>

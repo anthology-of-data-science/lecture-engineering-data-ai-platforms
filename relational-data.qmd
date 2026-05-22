@@ -1,0 +1,117 @@
+#  {background-image="images/edge-notch-cards.jpg" background-size="cover" style="font-size: 70%;" align="center"}
+
+::: {.newsection style="--h1-banner-color: #000000AA;"}
+The relational database
+:::
+
+## It all started with the relational database management system (RDBMS) {background-color="#ffffff"}
+{{< source "E.F. Codd (1970)" url="https://doi.org/10.1145/362384.362685" >}}
+
+![](images/coddpaper.webp)
+
+## Databases are often at the heart of an information system {background-color="#ffffff"}
+
+<br>
+
+![](images/information-system.png)
+
+
+## Databases are often at the heart of an information system {background-color="#ffffff"}
+
+<br>
+
+![](images/systemsarrow.png)
+
+## Relational algebra as the mathematical foundation
+{{< source "Geeks for geeks (2026)" url="https://www.geeksforgeeks.org/dbms/introduction-of-relational-algebra-in-dbms/" >}}
+
+![](images/relational-algebra.png)
+
+
+## Consider this description of our domain of interest
+
+::: {style="font-size: 80%;"}
+- Our company is divided into departments. Each department has a unique name, a unique department number and a department manager. The date this manager started, is registered. Furthermore, a department can be located on multiple locations.
+- All employees work for a specific department. Almost everyone has one supervisor, a supervisor may have several employees he is supervisor of. Every employee has a unique number, a name, a birth date, a gender, and a home address.
+- An employee works in one or more projects. Each project is controlled by one department, has a unique name and number and is settled on a location. Project members do not necessarily have to work fulltime for a project, but usually a fixed number of hours per week.
+- An employee may have several persons that are economically dependent on him: children and/or a spouse/husband. These can be identified by name, have a birth date and a gender. The sort of relationship is denoted as well.
+:::
+
+## Chen notation {background-color="#ffffff"}
+
+![](images/chen-notation.png)
+
+## Solution {background-color="#ffffff"}
+
+![](images/chen-notation-example.png)
+
+## Four layers of data modeling
+{{< source "Geonovum (2024)" url="https://www.geonovum.nl/geo-standaarden/metamodel-informatiemodellering-mim" >}}
+
+:::{.columns}
+:::{.column}
+![](images/four-layers-data-modeling.svg)
+:::
+:::{.column style="font-size: 80%;"}
+<br>
+
+- **Semantic:**<br>fact-based modeling, ontology modeling
+- **Conceptual:**<br>Entity-relationship modeling, UML modeling
+- **Logical:**<br>dimensional modeling, data vault modeling
+- **Physical:** DuckDB, Polars, SQL Server etc.
+:::
+:::
+
+## Relational models in datawarehouses: the dimensional model (aka star schema)
+{{< source "dbt documentation (2023)" url="https://docs.getdbt.com/blog/kimball-dimensional-model?version=1.12" >}}
+
+![](images/star-schema.png)
+
+## Relational models in datawarehouses: the data vault
+{{< source "Rahma Hassan (2023)" url="https://medium.com/@rahmahassan536/data-vault-modeling-a-flexible-and-scalable-approach-to-data-warehouses-53a88825d48" >}}
+
+![](images/data-vault.png)
+
+## The relational model vs. the document model {background-color="#ffffff"}
+
+![](images/barack-obama-relational.png)
+
+## The relational model vs. the document model {background-color="#ffffff"}
+
+:::{.columns}
+:::{.column width="30%"}
+![](images/barack-obama.png)
+:::
+:::{.column width="70%" style="font-size: 80%;"}
+<br>
+```json
+{
+  "user_id":     251,
+  "first_name":  "Barack",
+  "last_name":   "Obama",
+  "headline":    "Former President of the United States of America",
+  "region_id":   "us:91",
+  "photo_url":   "/p/7/000/253/05b/308dd6e.jpg",
+  "positions": [
+    {"job_title": "President", "organization": "United States of America"},
+    {"job_title": "US Senator (D-IL)", "organization": "United States Senate"}
+  ],
+  "education": [
+    {"school_name": "Harvard University",  "start": 1988, "end": 1991},
+    {"school_name": "Columbia University", "start": 1981, "end": 1983}
+  ],
+  "contact_info": {
+    "website": "https://barackobama.com",
+    "twitter": "https://twitter.com/barackobama"
+  }
+}
+```
+:::
+:::
+
+## But semantics often get lost in data models<br>Example: different conceptualizations of sex and gender
+{{< source "Zhang, Cornet & Benis (2024)" url="https://www.nature.com/articles/s41597-024-04168-1" >}}
+
+<br>
+
+![](images/sex-gender-concepts.png)

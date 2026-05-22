@@ -181,3 +181,10 @@ Bringing semantics back into data engineering
 - … plus many use-case specific extensions such as time-series database, spatial database etc.
 :::
 :::
+
+## Online safari
+
+- [DBpedia](https://dbpedia.org)
+- [neo4j tutorial: importing relational data into a graph](https://neo4j.com/docs/getting-started/data-import/import-relational-and-etl/)
+- [schema.org](https://schema.org/docs/gs.html#microdata_how)
+- [LinkML](https://linkml.io/)

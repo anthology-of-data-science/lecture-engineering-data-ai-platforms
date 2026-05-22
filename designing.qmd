@@ -4,6 +4,45 @@
 Designing data science & AI platforms
 :::
 
+## How to manage<br>the data science lifecycle in real-world applications?
+
+<br><br>
+![](images/crisp-dm-phases.png){width=200% .center fig-align="center"}
+
+:::{.notes}
+Data science teams need to interact with IT:
+
+- Design phase: solution designs / patterns
+- Development phase: data science workbench, data & analytics platform
+- Operational phase: maintenance monitoring
+:::
+
+## The best book on data engineering
+{{< source "Kleppmann & Riccomini (2026)" url="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/">}}
+
+:::: {.columns}
+::: {.column width="60%" style="font-size: 50%;"}
+
+- **Chapter 1: Tradeoffs in Data Systems Architecture**<br>_Analytical versus Operational Systems - Cloud versus Self-Hosting - Distributed versus Single-Node Systems - Data Systems, Law, and Society_
+- **Chapter 2: Defining Nonfunctional Requirements**<br>_Case Study: Social Network Home Timelines- Describing Performance - Reliability and Fault Tolerance - Scalability - Maintainability_
+- **Chapter 3: Data Models and Query Languages**<br>_Relational Model versus Document Model - Graph-Like Data Models - Event Sourcing and CQRS - DataFrames, Matrices, and Arrays_
+- **Chapter 4: Storage and Retrieval**<br>_Storage and Indexing for OLTP - Data Storage for Analytics - Multidimensional and Full-Text Indexes_
+- (...)
+- **Chapter 11: Batch Processing**<br>_Batch Processing in Distributed Systems - Batch Processing Models - Batch Use Cases_
+:::
+
+::: {.column width="40%"}
+![](images/ddia-2.jpg){fig-align="right" width=80%}
+:::
+::::
+
+## The common definition of data engineering
+{{< source "Reiss & Housley (2022)" url="https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/">}}
+
+<br>
+![ ](images/reiss-data-engineering.png){.nostretch fig-align="center" style="display:block; margin-left:auto; margin-right:auto;"}
+
+
 ## Our dream: a data system that just works
 {{< source "the Composable Codex" url="https://web.archive.org/web/20251208133433/https://voltrondata.com/codex" >}}
 

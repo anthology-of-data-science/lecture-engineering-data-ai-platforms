@@ -1,6 +1,6 @@
 ---
 title: " Engineering for data science & AI"
-subtitle: "Part I: Bringing semantics back into data & AI engineering<br/>Part II: Designing, building and operating data & AI platforms"
+subtitle: "A two-day Hitchhikers' guide to the stuff<br>that data professionals spend most of their time on"
 author: "Daniel Kapitan"
 email: "daniel@kapitan.net"
 website: "https://anthology-of-data.science"
@@ -26,10 +26,12 @@ d2:
 ::: {style="font-size: 60%;"}
 
 <br>
-This lecture is based on the following open access materials:
+This lecture is based on many open access materials for which references are given on each slide. We highlight the following resources, which provide the backbone of the main narrative:
 
+- L. Fioridi (2009), [Philosophical Conceptions of Information](https://www.researchgate.net/publication/220803995_Philosophical_Conceptions_of_Information)
 - Voltron Data, [The Composable Codex](https://web.archive.org/web/20251208133433/https://voltrondata.com/codex)
 - Documentation of the following Python libraries:<br>[DuckDB](https://duckdb.org/docs/), [polars](https://docs.pola.rs/), [Ibis](https://ibis-project.org), [dagster](https://docs.dagster.io/), [hamilton](https://github.com/dagworks-inc/hamilton), [Shiny for Python](https://shiny.posit.co/py/), [marimo](https://docs.marimo.io)
+- [Better Images of AI](https://betterimagesofai.org/), for non-stereotypical and thought provoking images
 
 Source code: [https://github.com/anthology-of-data-science/lecture-engineering-data-ai-platforms](https://github.com/anthology-of-data-science/lecture-engineering-data-ai-platforms)<br>
 
@@ -52,313 +54,130 @@ Analytical problem-solving with humans in the loop, focuses on
 - reasoning and decision-making
 :::
 
-<!-- #  {background-image="images/rebecca-hesketh-semantics.png" background-size="cover" style="font-size: 70%;" align="center"}
+## The scope of real-world data science
+{{< source "Fairness and machine learning (2023)" url="https://fairmlbook.org/index.html" >}}
 
-::: {.newsection style="--h1-banner-color: #000000AA;"}
-Bringing semantics back into data & AI engineering
-::: -->
-
-## From data to information and knowledge {background-color="#ffffff"}
-{{< source "Fioridi (2009)" url="https://www.researchgate.net/publication/220803995_Philosophical_Conceptions_of_Information" >}}
-
-![](images/fioridi-informational-map.png)
-
-## General definition of information {background-color="#ffffff"}
-{{< source "Fioridi (2009)" url="https://www.researchgate.net/publication/220803995_Philosophical_Conceptions_of_Information" >}}
-
+:::{.columns}
+:::{.column}
+![](images/world-data-models-humans.svg)
+:::
+:::{.column style="font-size: 80%;"}
 <br>
+**Etymology**
 
-### Information = Data + Meaning
-
-- multiple data points
-- data is well-formed (syntax)
-- data is meaningful in a certain context (semantics)
-
-## What is the meaning of this statement?
-<br><br><br><br>
-
-::: {style="font-size: 180%;"}
-### "Daniel has a high blood pressure"
+- _datum_: something given (fr. donné)
+- _informare_: formation of the mind
+- _modulus_: unit of measurement
+- _gnosis_: knowledge
+:::
 :::
 
-## The semantics of blood pressure {background-color="#ffffff"}
-{{< source "Edelman et al. (2024)" url="https://www.cell.com/the-innovation/fulltext/S2666-6758(24)00156-5" >}}
+## What are data?
+{{< source "Fairness and machine learning (2023)" url="https://fairmlbook.org/index.html" >}}
 
-<br>
-
-![](images/blood-pressure.jpg)
-
-## From data to information
-{{< source "Fioridi (2009)" url="https://www.researchgate.net/publication/220803995_Philosophical_Conceptions_of_Information" >}}
-
-<br>
-
-::: {.list-table style="font-size: 60%;"}
-- - Level
-  - Dimension
-  - Theoretical anchor
-  - Example
-
-- - **Data**
-  - Signal & Measurement
-  - Data is not "raw" but produced by instruments designed under specific physical theories.
-  - The voltage fluctuations from the sensor translated into a numerical output (e.g., 145/95).
-
-- - **Information (Statistical)**
-  - Entropy & Surprise
-  - Shannon Information Theory: The statistical novelty or reduction of uncertainty within a signal, regardless of meaning.
-  - A reading of 145 mmHg is "surprising" (high information content) if the patient's historical baseline is 120 mmHg.
-
-- - **Information (Semantic)**
-  - Context & Relations
-  - Ontologies & Knowledge Graphs: Data structured via schemas to provide meaning (units, subjects, and temporal states).
-  - Linking the "145" to "mmHg," "Patient X," and "Resting State" within a standardized medical ontology.
-
+:::{.columns}
+:::{.column}
+![](images/world-data-models-humans-box-1.svg)
 :::
-
-## ... and from information to knowledge
-{{< source "Fioridi (2009)" url="https://www.researchgate.net/publication/220803995_Philosophical_Conceptions_of_Information" >}}
-
+:::{.column style="font-size: 80%;"}
 <br>
 
-::: {.list-table style="font-size: 60%;"}
-- - Level
-  - Dimension
-  - Theoretical anchor
-  - Example
-
-- - **Knowledge (Propositional)**
-  - Justified True Belief (JTB)
-  - Classical Epistemology: Knowledge-that. A claim that is believed, is true, and has rigorous justification.
-  - The clinician’s belief that "Patient X has hypertension," justified by multiple readings and clinical guidelines.
-
-- - **Knowledge (Procedural)**
-  - Non-Propositional Skill
-  - Ryle’s "Knowledge-How": The tacit ability to perform a task that cannot be fully captured in formal data structures.
-  - The nurse’s skill in correctly placing the cuff and identifying the specific Korotkoff sounds amidst noise.
-
-- - **Knowledge (Acquaintance)**
-  - Personal experience
-  - familiarity with a person, place, or thing
-  - The nurse is familiar with the hospital
+- Data begins with counting
+- From relational databases to document databases and knowledge databases
+- From data to information to knowledge
+:::
 :::
 
 ## But what is "learning" and what are "models"?
 {{< source "Fairness and machine learning (2023)" url="https://fairmlbook.org/index.html" >}}
 
-::: {.columns}
-::: {.column}
+:::{.columns}
+:::{.column}
+![](images/world-data-models-humans-box-2.svg)
+:::
+:::{.column style="font-size: 80%;"}
 <br>
 
-- Machine learning model
-- Generative large language model
-- Logical reasoning model
-- Physical model
-- Data model
-- ...
+- Models as tools to obtain factual knowledge
+- Different types of models: machine learning model, generative AI model, causal model, deductive model
+- How does data science and "AI" change how we work with models?
+:::
+:::
 
-
-:::
-::: {.column}
-<br>
-![](images/world-data-models-humans.svg)
-:::
-:::
 
 ## The Ladder of Causality
 {{< source "Judea Pearl (2018)" url="https://en.wikipedia.org/wiki/The_Book_of_Why" >}}
 
-
 ::: {.columns}
-::: {.column}
-
-![](images/ladder-of-causality.png){height=500}
+::: {.column width="35%"}
+![](images/ladder-of-causality.png){height=500 }
 :::
-::: {.column}
+::: {.column width="65%" style="font-size: 80%;"}
 <br>
 
-### Always remember:
+### Remember:
 
 - Machine learning models are not the only models
 - Machine learning models are _only_ based on correlations
 - Machine learning _can not_ reason (although LLMs look like they can)
+- Read more on [analytical problem with different types of models](https://anthology-of-data.science/posts/analytical-problem-solving/)
 :::
 :::
 
-## Diving into data: different approaches to data modeling
-
-<br>
-
-- The basics: relational modeling
-- Bringing back semantics to data: the ontology pipeline
-- Comparison of different data models & query languages
-
-## It all started with the relational database management system (RDBMS) {background-color="#ffffff"}
-{{< source "E.F. Codd (1970)" url="https://doi.org/10.1145/362384.362685" >}}
-
-![](images/coddpaper.webp)
-
-## Databases are often at the heart of an information system {background-color="#ffffff"}
-
-<br>
-
-![](images/information-system.png)
-
-
-## Databases are often at the heart of an information system {background-color="#ffffff"}
-
-<br>
-
-![](images/systemsarrow.png)
-
-## Relational algebra as the mathematical foundation
-{{< source "Geeks for geeks (2026)" url="https://www.geeksforgeeks.org/dbms/introduction-of-relational-algebra-in-dbms/" >}}
-
-![](images/relational-algebra.png)
-
-
-## Consider this description of our domain of interest
-
-::: {style="font-size: 80%;"}
-- Our company is divided into departments. Each department has a unique name, a unique department number and a department manager. The date this manager started, is registered. Furthermore, a department can be located on multiple locations.
-- All employees work for a specific department. Almost everyone has one supervisor, a supervisor may have several employees he is supervisor of. Every employee has a unique number, a name, a birth date, a gender, and a home address.
-- An employee works in one of more projects. Each project is controlled by one department, has a unique name and number and is settled on a location. Project members do not necessarily have to work fulltime for a project, but usually a fixed number of hours per week.
-- An employee may have several persons that are economically dependent on him: children and/or a spouse/husband. These can be identified by name, have a birth date and a gender. The sort of relationship is denoted as well.
-:::
-
-## Chen notation {background-color="#ffffff"}
-
-![](images/chen-notation.png)
-
-## Solution {background-color="#ffffff"}
-
-![](images/chen-notation-example.png)
-
-## Relational models in datawarehouses: the dimensional model (aka star schema)
-{{< source "dbt documentation (2023)" url="https://docs.getdbt.com/blog/kimball-dimensional-model?version=1.12" >}}
-
-![](images/star-schema.png)
-
-## Relational models in datawarehouses: the data vault
-{{< source "Rahma Hassan (2023)" url="https://medium.com/@rahmahassan536/data-vault-modeling-a-flexible-and-scalable-approach-to-data-warehouses-53a88825d48" >}}
-
-![](images/data-vault.png)
-
-## But relational modeling alone is not enough
-
-<br>
-
-### How would you define a customer?
-
-- A person, a company?
-- Based on order history, since when?
-- Difference between an 'occasional' customer vs a 'loyal' customer?
-- Someone who has ordered but payment is done by someone ele?
-- ...
-
-## KIK-V ontology for the Dutch care sector {background-color="#ffffff"}
-{{< source "Zorginstituut KIK-V" url="https://kik-v-publicatieplatform.nl/ontologie/onz-pers/3.0.0" >}}
-
-```{=html}
-<iframe width="1200" height="500" src="https://kik-v-publicatieplatform.nl/ontologie/onz-pers/3.0.0"></iframe>
-```
-
-## The Ontology Pipeline
-{{< source "Jessica Talisman (2025)" url="https://jessicatalisman.substack.com/p/the-ontology-pipeline?r=ee6qm&triedRedirect=true" >}}
+## Using data and models in real-world applications
+{{< source "Fairness and machine learning (2023)" url="https://fairmlbook.org/index.html" >}}
 
 :::{.columns}
 :::{.column}
-![](images/ontology-pipeline.png)
+![](images/world-data-models-humans-box-3.svg)
 :::
-:::{.column style="font-size: 70%;"}
-**Ontologies** enhance **vocabularies** by describing and contextualizing relationships between concepts and with the introduction of logical reasoning. By assigning classes, properties, relations and attributes, ontologies establish rule bases that define how concepts behave in the wild, ensuring a level of coherence within complex information systems. Machines love ontologies because of their high-fidelity disambiguation and description, which bring clarity to machine understanding for tasks such as information retrieval, entity management, concept discovery, and RAG implementations for AI systems.
-:::
-:::
-
-## Are graphs the future?
-
-:::{style="font-size: 70%;"}
+:::{.column style="font-size: 80%;"}
 <br>
 
-### I certainly think so
-
-- Read this comprehensive introduction by [Hogan et al. (2021)](https://dl.acm.org/doi/pdf/10.1145/3447772)
-- Labeled property graph (cypher/GQL): try the [neo4j sandbox](https://neo4j.com/sandbox/)
-- RDF Triple Store (SPARQL): try the [data.world SPARQL tutorial](https://neo4j.com/sandbox/)
-
-:::{.callout-caution}
-- The RDF/SPARQL stack is mostly used by the ontology community
-- Labeled Property Graphs as more commonly used by companies
-- [Graph Query Language GQL](https://www.gqlstandards.org/) is the new ISO standard, similar to SQL and derived from cypher (neo4j)
-- There is also [GraphQL](https://graphql.org/), which is an API format and something completely different from GQL
-:::
-
-:::
-
-## SPARQL vs. Cypher/GQL comparison
-{{< source "Arthur Keen (2018)" url="https://dzone.com/articles/sparql-and-cypher" >}}
-
-![](images/sparql-gql.png)
-
-## Choose your data structure and engine wisely
-{{< source "Rishabh Agarwal (2025)" url="https://designsystemsweekly.substack.com/p/15-databases-15-use-cases-the-ultimate" >}}
-
-![](images/types-of-databases.png)
-
-## The elephant is your friend
-{{< source "Pigsty" url="https://pigsty.io/ext/" >}}
-
-:::{.columns}
-:::{.column}
-![](images/postgresql-ecosystem.png)
-:::
-:::{.column style="font-size: 70%;"}
-
-<br>
-
-- **One physical engine:** PostgreSQL is the most widely used open source relational database management system
-- **Supports different data structures:** not only relational but also document model ([JSONB](https://neon.com/guides/document-store)) and labeled property graph ([Apache AGE](https://age.apache.org/))
-- … plus many use-case specific extensions such as time-series database, spatial database etc.
+- Platforms for working with data and models
+- Governance of data & models in organizations
+- Ethical, legal and societal impact of using data & models
+- Human-computer interactions 
 :::
 :::
 
-## How to manage<br>the data science lifecycle in real life?
+## Thinking, Fast and Slow
+{{< source "Daniel Kahneman (2011)" url="https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow" >}}
 
-<br><br>
-![](images/crisp-dm-phases.png){width=200% .center fig-align="center"}
+![](images/kahneman-two-systems.png)
 
 :::{.notes}
-Data science teams need to interact with IT:
-
-- Design phase: solution designs / patterns
-- Development phase: data science workbench, data & analytics platform
-- Operational phase: maintenance monitoring
+- We assume models help us in making rational decisions --> we don't make rational decision
+- Framing: the way data and information is presented to us has large impact on the decision we make
 :::
 
-## The best book on data engineering
-{{< source "Kleppmann & Riccomini (2026)" url="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/">}}
-
-:::: {.columns}
-::: {.column width="60%" style="font-size: 50%;"}
-
-- **Chapter 1: Tradeoffs in Data Systems Architecture**<br>_Analytical versus Operational Systems - Cloud versus Self-Hosting - Distributed versus Single-Node Systems - Data Systems, Law, and Society_
-- **Chapter 2: Defining Nonfunctional Requirements**<br>_Case Study: Social Network Home Timelines- Describing Performance - Reliability and Fault Tolerance - Scalability - Maintainability_
-- **Chapter 3: Data Models and Query Languages**<br>_Relational Model versus Document Model - Graph-Like Data Models - Event Sourcing and CQRS - DataFrames, Matrices, and Arrays_
-- **Chapter 4: Storage and Retrieval**<br>_Storage and Indexing for OLTP - Data Storage for Analytics - Multidimensional and Full-Text Indexes_
-- (...)
-- **Chapter 11: Batch Processing**<br>_Batch Processing in Distributed Systems - Batch Processing Models - Batch Use Cases_
-:::
-
-::: {.column width="40%"}
-![](images/ddia-2.jpg){fig-align="right" width=80%}
-:::
-::::
-
-## The common definition of data engineering
-{{< source "Reiss & Housley (2022)" url="https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/">}}
+## Engineering for data science & AI
 
 <br>
-![ ](images/reiss-data-engineering.png){.nostretch fig-align="center" style="display:block; margin-left:auto; margin-right:auto;"}
+
+::: {.card-grid .cols-2 style="font-size: 80%;"}
+::: {.card}
+**Part I**
+
+- Data as measurement:<br>the basics of working with data
+- The relational database
+- Bringing semantics back<br>into data engineering
+:::
+::: {.card}
+**Part II**
+
+- Designing<br>data science & AI platforms
+- Patterns for building<br>data & AI systems
+- MLOps
+:::
+:::
+
+
+{{< include data-basics.qmd >}}
+
+{{< include relational-data.qmd >}}
+
+{{< include semantics.qmd >}}
 
 {{< include designing.qmd >}}
 

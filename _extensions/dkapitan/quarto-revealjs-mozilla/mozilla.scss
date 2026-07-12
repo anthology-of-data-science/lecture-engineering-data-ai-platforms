@@ -30,15 +30,15 @@ $presentation-block-margin:           12px !default;
 // ── Font shorthand (from _brand.yml typography.monospace.family) ──────────────
 $font-monospace: $font-family-monospace, monospace;
 
-// ── Cover/title slide: Zilla Slab Highlight for H1 ───────────────────────────
-// _brand.yml sets Zilla Slab for all headings; this overrides the title H1
+// ── Cover/title slide: Mozilla Headline for H1 ───────────────────────────
+// _brand.yml sets Mozilla Headline for all headings; this overrides the title H1
 // specifically with the decorative Highlight variant (not expressible in brand.yml).
-.reveal .slides section.title-slide h1,
+/* .reveal .slides section.title-slide h1,
 .reveal .slides section.quarto-title-block h1,
 .reveal .slides section.cover-slide h1 {
-  font-family: "Zilla Slab Highlight", "Zilla Slab", serif;
+  font-family: "Mozilla Headline", serif;
   font-weight: 700;
-}
+} */
 
 // ── H2 line height (tighter than global heading default of 1.1) ───────────────
 .reveal .slides section h2 {
@@ -159,7 +159,7 @@ $font-monospace: $font-family-monospace, monospace;
 
 // H1 on title slide: larger, Highlight font, allows <br> line-break
 .reveal .slides section.title-slide h1.title {
-  font-family: "Zilla Slab Highlight", "Zilla Slab", serif;
+  font-family: "Mozilla Headline", serif;
   font-weight: 700;
   font-size: 1.8em;
   line-height: 1.2;
@@ -412,7 +412,7 @@ $font-monospace: $font-family-monospace, monospace;
 // ── New section slide styling ────────────────────────────────────────────────────────
 $h1-banner-color: #111111 !default;  // near-black from _brand.yml color.palette
 .newsection {
-  font-family: "Zilla Slab", serif;
+  font-family: "Mozilla Headline", serif;
   font-weight: 700;
   font-size: 1.5em;
   padding-top: 0;
